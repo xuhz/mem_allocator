@@ -12,11 +12,11 @@ allocs with size(mcb length included) in range (0-128] can be served
 by whichever entry in this freelist.
 
 malloc_size	correl_index	object_size_in_freelist	freelist_index
-(0-128]		0				[128-256)				0
-(128-256]	1				[256-512)				1
+(0-128]		0		[128-256)			0
+(128-256]	1		[256-512)			1
 ...
-(64k-128k]	10				[128k]					10  
-(128k+]		11				[128k+] 				11
+(64k-128k]	10		[128k]				10  
+(128k+]		11		[128k+] 			11
 
 The size range for segments in last freelist is [128k,...), an alloc with
 size larger than 128k need to check one by one in this list. Currently,

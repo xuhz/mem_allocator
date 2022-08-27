@@ -113,6 +113,9 @@ stat_t showstat[N_FREELIST] = {
 		.object_sz = "[64k-128k)",
 	},
 	{
+		.object_sz = "[128k-256k)",
+	},
+	{
 		.object_sz = "[128k+)",
 	},
 };
@@ -425,7 +428,7 @@ void t_memfini(void) {
 	int i;
 	for (i = 0; i < N_FREELIST - 1; i++) {
 #ifdef STATISTICS
-		printf("check freelist: %d\n", i);
+		printf("check freelist: %d item size: %s\n", i, showstat[i].object_sz);
 		printf("\t alloc: %ld\n", showstat[i].alloc);
 		printf("\t free: %ld\n", showstat[i].free);
 		printf("\t alloc_from_last_corral: %ld\n", showstat[i].alloc_from_last_corral);
@@ -439,7 +442,7 @@ void t_memfini(void) {
 	assert(entire_list->prev->prev == entire_list);
 	assert(NODE_OWNER(entire_list->next, heap_node)->magic == FREE_MAGIC);
 #ifdef STATISTICS
-		printf("check freelist: %d\n", i);
+		printf("check freelist: %d item size: %s\n", i, showstat[i].object_sz);
 		printf("\t alloc: %ld\n", showstat[i].alloc);
 		printf("\t free: %ld\n", showstat[i].free);
 		printf("\t alloc_from_last_corral: %ld\n", showstat[i].alloc_from_last_corral);
